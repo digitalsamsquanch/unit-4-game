@@ -1,0 +1,46 @@
+.background {
+    background-image: url('../images/starwars.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.titleContainer {
+    height: 10%;
+    width: auto;
+    text-align: right;
+    margin-left: 30px;
+    font-family: 'Faster One', cursive;
+    font-size: 3rem;
+    color: white;
+}
+
+
+.charCol {
+    margin: 0;
+    float: left;
+    padding: 0;
+}
+
+.charCard {
+    /* position: relative; */
+    width: 8rem;
+    height: auto;
+    border: 2px solid red;
+}
+
+.charImg {
+    /* position: absolute; */
+    padding: 0 7%;
+    height: 100%;
+    width: 100%;
+}
+
+.charTitle {
+    font-family: 'Geostar Fill', cursive;
+    color: white;
+    text-shadow: 2px 2px black;
+}
+
+.charRow {
+    height: 202px;
+}
