@@ -1,3 +1,8 @@
+.mainContainer {
+    /* margin-left: 1%;
+    padding-left: 1%; */
+}
+
 .background {
     background-image: url('../images/starwars.jpg');
     background-repeat: no-repeat;
@@ -17,13 +22,13 @@
 
 .charCol {
     margin: 0;
-    float: left;
     padding: 0;
+    border: 5px solid black;
 }
 
 .charCard {
     /* position: relative; */
-    width: 8rem;
+    /* width: 8rem; */
     height: auto;
     border: 2px solid red;
 }
@@ -43,4 +48,10 @@
 
 .charRow {
     height: 202px;
+    margin-left: 0;
 }
+
+/* .titleRow {
+    margin-left: 0;
+    padding-left: 0;
+} */
