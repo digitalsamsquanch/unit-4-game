@@ -1,6 +1,31 @@
+$(document).ready(function(){
 /* 
-- make variable for each playable character
+- make object for each playable character
 - for each character make a variable for their hitpoints
+*/
+var reyCard = [
+    {
+        name:  "Rey",
+        hitPoints: 150,
+        counterattack: 20
+    },
+    {
+        name: "Boba Fett",
+        hitPoints: 100,
+        counterattack: 50
+    },
+    {
+        name: "Grievous",
+        hitPoints: 200,
+        counterattack: 10
+    },
+    {
+        name: "Phasma",
+        hitPoints: 180,
+        counterattack: 15
+    }
+]
+/*
 - create a counterattack power level for each character and assign variable
 - when character is selected, move the rest of the characters to the "enemies available to attack" area
 - when user selects enemy, move that enemy to the "Defender" area
@@ -12,3 +37,4 @@
 - have user select new defender when they defeat a defender
 - once final defender is beaten declare the player the winner
 */
+});

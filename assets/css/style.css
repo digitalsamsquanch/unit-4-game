@@ -17,13 +17,13 @@
     font-family: 'Faster One', cursive;
     font-size: 3rem;
     color: white;
+    padding-top: 0;
 }
 
 
 .charCol {
     margin: 0;
     padding: 0;
-    border: 5px solid black;
 }
 
 .charCard {
@@ -44,14 +44,19 @@
     font-family: 'Geostar Fill', cursive;
     color: white;
     text-shadow: 2px 2px black;
+    font-size: 1rem;
 }
 
-.charRow {
-    height: 202px;
+.enemyRow {
+    height: 155px;
     margin-left: 0;
 }
 
-/* .titleRow {
-    margin-left: 0;
-    padding-left: 0;
-} */
+.card-header {
+    padding:0;
+}
+
+.charCard img {
+    max-height: 100px;
+    max-width: auto;
+}
