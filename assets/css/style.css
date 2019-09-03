@@ -21,19 +21,17 @@
 }
 
 
-.charCol {
+.cols {
     margin: 0;
     padding: 0;
 }
 
-.charCard {
-    /* position: relative; */
-    /* width: 8rem; */
+.cards {
     height: auto;
     border: 2px solid red;
 }
 
-.charImg {
+.imgs {
     /* position: absolute; */
     padding: 0 7%;
     height: 100%;
@@ -49,14 +47,14 @@
 
 .enemyRow {
     height: 155px;
-    margin-left: 0;
+    /* margin-left: 0; */
 }
 
-.card-header {
+.card-header, .card-footer {
     padding:0;
 }
 
-.charCard img {
+.cards img {
     max-height: 100px;
     max-width: auto;
 }
