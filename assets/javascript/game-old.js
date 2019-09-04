@@ -45,9 +45,6 @@ $(".charCol").click(function(){
 
     
 /*
-- create a counterattack power level for each character and assign variable
-- when character is selected, move the rest of the characters to the "enemies available to attack" area
-
 - when user selects enemy, move that enemy to the "Defender" area
 - create attack button
 - set base attack power at 6 and set it to increase by 6 every time attack takes place
