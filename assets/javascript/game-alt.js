@@ -1,5 +1,8 @@
 var chosen = "";
 var myChar = "";
+var enemyName = [];
+var notChosenID = [];
+var enemy = 
 
 $(document).ready(function() {
   /* 
@@ -9,24 +12,28 @@ $(document).ready(function() {
   var characters = [
     {
       name: "Rey",
+      id: "rey",
       hitPoints: 150,
       counterattack: 20,
       picture: "assets/images/rey-red-saber.jpg"
     },
     {
       name: "Boba Fett",
+      id: "bobafett",
       hitPoints: 100,
       counterattack: 50,
       picture: "assets/images/Boba2.jpeg"
     },
     {
       name: "Grievous",
+      id: "grievous",
       hitPoints: 200,
       counterattack: 10,
       picture: "assets/images/Grievous.jpg"
     },
     {
       name: "Phasma",
+      id: "phasma",
       hitPoints: 180,
       counterattack: 15,
       picture: "assets/images/Phasma.jpg"
@@ -38,22 +45,60 @@ $(document).ready(function() {
         var notChosen = [];
 
         $(this).attr('class', existClass + ' chosenChar');
-        notChosen = $(".charCol").not(".chosenChar")
-        notChosen.hide();
-        for(var i = 0; i < notChosen.length; i++){
-            var notChosenValue = (notChosen[i].attributes[2].value);
-            enemy = ($(".enemyCol")[i])
-            enemyName = ($(".enemyCol")[i]).attributes["'value'"].value
-            
-            if(enemyName == notChosenValue){
-                console.log("here");
-                enemy.show()
+
+        console.log(characters[0].id);
+        for(var index = 0; index < characters.length; index++){
+            if($(characters[index]).id != this.id){
+                $(".enemyCol").show();
             }
-            console.log("enemy" + enemy)
-            console.log("enemyName " + enemyName)
-            console.log("chosen " + notChosenValue)
+        }
+        notChosen = $(".charCol").not(".chosenChar")
+        // console.log("Not Chose" + notChosen)
+        notChosen.hide();
+        for(var i = 1; i < 4; i++){
+            // nID = notChosen[i].attributes.id.value;
+            // notChosenID.push(nID);
+            eName = $(".enemyRow")[0].childNodes[1].attributes.id.value
+            console.log(eName);
+            enemy.push(eName);
+            enemyName.push(enemy);
+            console.log(enemyName)
+            // return enemyName;
+        }
+        // gives the list of values in the 
+        // console.log("Enemy " + enemyName);
+        // console.log(notChosenID);
+        for(var i = 0; i < 3; i++){
+        if(!enemyName.includes(notChosenID[i])){
+            console.log("here");
+            enemy.show()
+        }
         }
     });
+    //     $(this).attr('class', existClass + ' chosenChar');
+    //     notChosen = $(".charCol").not(".chosenChar")
+    //     console.log("Not Chose" + notChosen)
+    //     notChosen.hide();
+    //     for(var i = 1; i < 4; i++){
+    //         // nID = notChosen[i].attributes.id.value;
+    //         // notChosenID.push(nID);
+    //         eName = $(".enemyRow")[0].childNodes[1].attributes.id.value
+    //         console.log(eName);
+    //         enemy.push(eName);
+    //         enemyName.push(enemy);
+    //         console.log(enemyName)
+    //         // return enemyName;
+    //     }
+    //     // gives the list of values in the 
+    //     // console.log("Enemy " + enemyName);
+    //     // console.log(notChosenID);
+    //     for(var i = 0; i < 3; i++){
+    //     if(!enemyName.includes(notChosenID[i])){
+    //         console.log("here");
+    //         enemy.show()
+    //     }
+    //     }
+    // });
 
     $(".btn").click(function(){
         alert("hello")
@@ -63,7 +108,7 @@ $(document).ready(function() {
     for (var i = 0; i < characters.length; i++) {
 
         $(".charRow").append(
-        $("<div id='cols" + i + "' class='col-md-2 cols charCol' 'value'='" + characters[i].name + "'></div>").append(
+        $("<div id='" + characters[i].id + "' class='col-md-2 cols charCol'></div>").append(
             $("<div class='card text-center cards'></div>").append(
             $("<div class='card-header'>" + characters[i].name + "</div>"),
             $(
@@ -83,7 +128,7 @@ $(document).ready(function() {
         );
 
         $(".enemyRow").append(
-            $("<div id='cols" + i + "' class='col-md-2 cols enemyCol' 'value'='" + characters[i].name + "'></div>").append(
+            $("<div id='" + characters[i].id + "' class='col-md-2 cols enemyCol'></div>").append(
                 $("<div class='card text-center cards'></div>").append(
                 $("<div class='card-header'>" + characters[i].name + "</div>"),
                 $(
@@ -103,7 +148,7 @@ $(document).ready(function() {
             );
 
         $(".defendRow").append(
-            $("<div id='cols" + i + "' class='col-md-2 cols defendCol'></div>").append(
+            $("<div id='" + characters[i].id + "' class='col-md-2 cols defendCol'></div>").append(
                 $("<div class='card text-center cards'></div>").append(
                 $("<div class='card-header'>" + characters[i].name + "</div>"),
                 $(
