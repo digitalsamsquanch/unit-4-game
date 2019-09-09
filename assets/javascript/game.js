@@ -48,6 +48,8 @@ $(document).ready(function() {
 
         console.log(characters[0].id);
         for(var index = 0; index < characters.length; index++){
+            console.log(characters[index].id)
+            console.log(this.id)
             if($(characters[index]).id != this.id){
                 $(".enemyCol").show();
             }
