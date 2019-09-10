@@ -27,7 +27,7 @@ $(document).ready(function() {
       name: "Grievous",
       id: "grievous",
       hitPoints: 200,
-      counterattack: 5,
+      counterattack: 12,
       picture: "assets/images/Grievous.jpg"
     },
     {
@@ -65,9 +65,10 @@ $(document).ready(function() {
                 currentEnemy = defenders[i];
             };
         };
+        $(".buttonSpot").html("<button type='button' class='btn btn-dark'>Attack</button>")
     });
 
-    $(".btn").click(function(){
+    $("body").on("click", ".buttonSpot", function(){
         fight();
     });
 
@@ -90,6 +91,7 @@ $(document).ready(function() {
             if(!$(".enemyCol:visible").length == 0 && !$(".defendCol:visible").length == 0){
                 $(".battleText").text("You have defeated your opponent");
                 $(currentEnemy).hide()
+                $(".buttonSpot").empty()
             } else{
                 $(".battleText").text("You have defeated all of your opponents!!!");
                 $(currentEnemy).hide();
