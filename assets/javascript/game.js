@@ -1,110 +1,105 @@
 var chosen = "";
 var myChar = "";
 var enemyName = [];
-var notChosenID = [];
-var enemy = 
+var notChosen = [];
+var enemyList = [];
+var attackPower = 6;
+var attackCounter = 0;
+var currentEnemy;
 
 $(document).ready(function() {
-  /* 
-    - make object for each playable character
-    - for each character make a variable for their hitpoints
-    */
   var characters = [
     {
       name: "Rey",
       id: "rey",
       hitPoints: 150,
-      counterattack: 20,
+      counterattack: 15,
       picture: "assets/images/rey-red-saber.jpg"
     },
     {
       name: "Boba Fett",
       id: "bobafett",
       hitPoints: 100,
-      counterattack: 50,
+      counterattack: 7,
       picture: "assets/images/Boba2.jpeg"
     },
     {
       name: "Grievous",
       id: "grievous",
       hitPoints: 200,
-      counterattack: 10,
+      counterattack: 5,
       picture: "assets/images/Grievous.jpg"
     },
     {
       name: "Phasma",
       id: "phasma",
       hitPoints: 180,
-      counterattack: 15,
+      counterattack: 10,
       picture: "assets/images/Phasma.jpg"
     }
   ];
 
     $("body").on("click", ".charCol", function() {
-        var existClass = $(this).attr("class");
-        var notChosen = [];
-
-        $(this).attr('class', existClass + ' chosenChar');
-
-        console.log(characters[0].id);
-        for(var index = 0; index < characters.length; index++){
-            console.log(characters[index].id)
-            console.log(this.id)
-            if($(characters[index]).id != this.id){
-                $(".enemyCol").show();
+        
+        $(this).addClass('chosenChar');
+        $(".charCol:not(.chosenChar)").hide();
+        notChosen = $(".charCol:not(.chosenChar)");
+        for(var i = 0; i < characters.length; i++){
+            if(characters[i].id != this.id){
+                enemyList.push(characters[i].id)
             }
         }
-        notChosen = $(".charCol").not(".chosenChar")
-        // console.log("Not Chose" + notChosen)
-        notChosen.hide();
-        for(var i = 1; i < 4; i++){
-            // nID = notChosen[i].attributes.id.value;
-            // notChosenID.push(nID);
-            eName = $(".enemyRow")[0].childNodes[1].attributes.id.value
-            console.log(eName);
-            enemy.push(eName);
-            enemyName.push(enemy);
-            console.log(enemyName)
-            // return enemyName;
-        }
-        // gives the list of values in the 
-        // console.log("Enemy " + enemyName);
-        // console.log(notChosenID);
-        for(var i = 0; i < 3; i++){
-        if(!enemyName.includes(notChosenID[i])){
-            console.log("here");
-            enemy.show()
-        }
-        }
+        enemies = $(".enemyCol");
+        for(var i = 0; i < enemies.length; i++){
+            if(enemyList.includes($(enemies[i]).attr('id'))){
+                $(enemies[i]).show();
+            };
+        };
     });
-    //     $(this).attr('class', existClass + ' chosenChar');
-    //     notChosen = $(".charCol").not(".chosenChar")
-    //     console.log("Not Chose" + notChosen)
-    //     notChosen.hide();
-    //     for(var i = 1; i < 4; i++){
-    //         // nID = notChosen[i].attributes.id.value;
-    //         // notChosenID.push(nID);
-    //         eName = $(".enemyRow")[0].childNodes[1].attributes.id.value
-    //         console.log(eName);
-    //         enemy.push(eName);
-    //         enemyName.push(enemy);
-    //         console.log(enemyName)
-    //         // return enemyName;
-    //     }
-    //     // gives the list of values in the 
-    //     // console.log("Enemy " + enemyName);
-    //     // console.log(notChosenID);
-    //     for(var i = 0; i < 3; i++){
-    //     if(!enemyName.includes(notChosenID[i])){
-    //         console.log("here");
-    //         enemy.show()
-    //     }
-    //     }
-    // });
+    $("body").on("click", ".enemyCol", function() {
+        $(this).addClass("enemy1").hide();
+        var defenders = $(".defendCol")
+        for(var i = 0; i < defenders.length; i++){
+            if($(defenders[i]).attr('id') == this.id){
+                $(defenders[i]).show();
+                currentEnemy = defenders[i];
+            };
+        };
+    });
 
     $(".btn").click(function(){
-        alert("hello")
+        fight();
     });
+
+    function fight() {
+        
+        var characterHP = $(".chosenChar").find(".cards").find(".card-footer").text();
+        var enemyHP = $(currentEnemy).find(".cards").find(".card-footer").text();
+        var enemyCounter = $(currentEnemy).attr("counterattack")
+        attackCounter++
+        var currentAP = attackPower * attackCounter;
+        enemyHP = parseInt(enemyHP) - currentAP;
+        characterHP = characterHP - enemyCounter;
+        $(currentEnemy).find(".cards").find(".card-footer").text(enemyHP)
+        $(".chosenChar").find(".cards").find(".card-footer").text(characterHP)
+        $(".battleText").text("You have hit your opponent for " + currentAP + " damage! They have countered and hit you for " + enemyCounter + " damage!");
+        console.log(enemyHP)
+        console.log(attackCounter)
+        console.log(currentAP)
+        if(characterHP > 0 && enemyHP <= 0){
+            if(!$(".enemyCol:visible").length == 0 && !$(".defendCol:visible").length == 0){
+                $(".battleText").text("You have defeated your opponent");
+                $(currentEnemy).hide()
+            } else{
+                $(".battleText").text("You have defeated all of your opponents!!!");
+                $(currentEnemy).hide();
+            };
+        } 
+        else if(characterHP <= 0){
+            $(".battleText").text("You have been defeated!");
+        }
+        
+    };
 
   function startGame(){
     for (var i = 0; i < characters.length; i++) {
@@ -150,7 +145,7 @@ $(document).ready(function() {
             );
 
         $(".defendRow").append(
-            $("<div id='" + characters[i].id + "' class='col-md-2 cols defendCol'></div>").append(
+            $("<div id='" + characters[i].id + "' counterattack=" + characters[i].counterattack + " class='col-md-2 cols defendCol'></div>").append(
                 $("<div class='card text-center cards'></div>").append(
                 $("<div class='card-header'>" + characters[i].name + "</div>"),
                 $(
@@ -159,8 +154,7 @@ $(document).ready(function() {
                 $("<div class='card-footer'></div>").append(
                     $(
                     "<div id='" +
-                        characters[i].name +
-                        "'HP>" +
+                        characters[i].id +"HP'>" +
                         characters[i].hitPoints +
                         "</div>"
                     )
@@ -171,20 +165,5 @@ $(document).ready(function() {
     };
 
   };
-
-  
-  /*
-    - create a counterattack power level for each character and assign variable
-    - when character is selected, move the rest of the characters to the "enemies available to attack" area
-    
-    - when user selects enemy, move that enemy to the "Defender" area
-    - create attack button
-    - set base attack power at 6 and set it to increase by 6 every time attack takes place
-    - subtract the attacks from the hitpoints of the defender
-    - have a counter attack by the defender after each attack from the player and subtract that from the player hitpoints
-    - end the game if player reaches 0 hitpoints
-    - have user select new defender when they defeat a defender
-    - once final defender is beaten declare the player the winner
-    */
    startGame();
 });

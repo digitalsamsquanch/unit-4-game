@@ -58,3 +58,10 @@
     max-height: 100px;
     max-width: auto;
 }
+
+.battleText {
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    text-shadow: 2px 2px black;
+    font-size: 1rem;
+}
